@@ -1,0 +1,27 @@
+{
+  "name": "moorphy",
+  "version": "1.0.0",
+  "description": "test project",
+  "main": "index.js",
+  "dependencies": {
+    "cheerio": "^0.20.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moorphy/itc298-s16.git"
+  },
+  "keywords": [
+    "test",
+    "project"
+  ],
+  "author": "Mike Murphy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moorphy/itc298-s16/issues"
+  },
+  "homepage": "https://github.com/moorphy/itc298-s16#readme"
+}
