@@ -14,12 +14,9 @@ http.createServer(function(req,res){
             break;
         default:
             res.writeHead(404, {'Content-Type': 'text/plain'});
-            res.end('Not Found');
+            res.end('Not Found. Sorry, Invaild Route');
             break;
     }
-   //console.log("Is this thing working yet?");
-   //res.writeHead(100, {'Content-Type': 'text/plain'});
-   //res.end("Wassup World");
     
 }).listen(process.env.PORT);
-console.log("Someone is on your site");
+console.log("Server is up");
