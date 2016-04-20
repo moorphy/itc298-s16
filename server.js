@@ -41,6 +41,8 @@
     { name: 'king', book: 'The Shining' },
     { name: 'hemingway' , book: 'The Old Man and The Sea'}
 ];
+
+    //Posting the Search
     server.post('/search', function(req,res){
     res.type('html');
     var searching = '<h1>Searching for: ' + req.body.userinput + '</h1>';
