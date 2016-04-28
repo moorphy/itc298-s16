@@ -2,7 +2,7 @@
   "name": "moorphy",
   "version": "1.0.0",
   "description": "test project",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
     "body-parser": "^1.15.0",
     "cheerio": "^0.20.0",
