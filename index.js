@@ -42,12 +42,12 @@
     var searchResults = req.body.userinput;
     if (books.searchArray(searchResults)){
 
-        res.send(searching + 'Book: ' + books.searchArray(searchResults).title + '<br> By: ' + books.searchArray(searchResults).name 
+        res.render(searching + 'Book: ' + books.searchArray(searchResults).title + '<br> By: ' + books.searchArray(searchResults).name 
         + '<br>' +  books.searchArray(searchResults).pages  + ' pages');
 
     } else {
         
-        res.send(searching + 'No Books by that name. Sorry');
+        res.render(searching + 'No Books by that name. Sorry');
     }
     
 });
@@ -58,7 +58,7 @@
         var checkOut = '<h3>Checking out: ' + req.body.checkOut + '</h3>';
         var deleteBook = req.body.checkOut;
         books.removeBook(deleteBook);
-        res.send(checkOut + deleteBook + ' has been removed!');
+        res.render(checkOut + deleteBook + ' has been removed!');
 });
 
     //ADD A BOOK
@@ -70,7 +70,7 @@
         //Add to Object in Books.js
         books.addBook(newBook);
         //SEND RESPONSE TO CLIENT
-        res.send(addingBook + ' " ' + req.body.addTitle + ' " '+ 'By: '+ req.body.addAuthor + ' has been added.');
+        res.render(addingBook + ' " ' + req.body.addTitle + ' " '+ 'By: '+ req.body.addAuthor + ' has been added.');
     
 });
 
@@ -84,11 +84,11 @@
        //IF A BOOK IS FOUND IT IS UPDATED
        if (books.updateInfo() === 1){
            //Send a msg saying it was updated
-           res.send(updateMsg + ' to ' + req.body.updateAddAuthor);
+           res.render(updateMsg + ' to ' + req.body.updateAddAuthor);
        }
        //IF IT WAS NOT UPDATED
        else{
-           res.send('Nothing was updated');
+           res.render('Nothing was updated');
        }
         
     });
