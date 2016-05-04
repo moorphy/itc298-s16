@@ -95,7 +95,7 @@
 
     
     //Middleware
-
+    
     // 404 Catch-All Handler
     server.use(function(req, res, next){
     res.status(404);
