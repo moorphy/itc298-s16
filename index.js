@@ -2,12 +2,19 @@
 
     var express = require('express');
     var xbars = require('express-handlebars');
-    
     var server = express();
     var books = require('./lib/books.js');
     
-    server.engine('handlebars', xbars({defaultLayout:'main'}));
-    server.set('view engine', 'handlebars');
+    
+    server.engine('hbs', xbars({defaultLayout:'main', extname: '.hbs'}));
+    server.set('view engine', 'hbs');
+    
+    //LOCALHOST 3000
+    server.set('port',process.env.PORT || 3000);
+    server.listen(server.get('port'), function(){
+    console.log('The Server is Up. CTL + C to terminate')
+});
+
     
     // POST http://localhost:8080/api/users
     // parameters sent with 
@@ -19,20 +26,27 @@
     //res.send(user_id + ' ' + token + ' ' + geo);
     //});
     
+    //BODY PARSER
+    //body-parser extracts the entire body portion of an incoming 
+    //request stream and exposes it on req.body as something easier 
+    //to interface with
     var bodyParser = require('body-parser');
-    server.use(bodyParser.json()); //support json encoded bodies
-    server.use(bodyParser.urlencoded({ extended:true})); //support encoded bodies
+    server.use(bodyParser.json());
+    //support encoded bodies
+    server.use(bodyParser.urlencoded({ extended:true})); 
+    
+    //CSS IMAGES JS FILES ROUTE TO PUBLIC FOLDER
+    server.use(express.static('public'));
     
     server.get('/', function (req, res){
     res.render('home'); 
     });
     server.get('/about', function (req, res){
-        res.render('about');
+    res.render('about');
     });
-    server.listen(process.env.PORT || 3000);
-    server.listen(server.get('port'), function(){
-    console.log('The Server is Up')
-});
+
+    //Variable that updates copyright year
+    //var year = getFullYear();
 
 
     //Posting the Search

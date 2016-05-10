@@ -1,0 +1,57 @@
+@charset "utf-8";
+/* CSS Document */
+
+footer, header, nav, section { 
+    display: block; 
+    
+}
+#main{
+    margin:0 auto;
+    width:80%;
+}
+
+hr  {
+	color:black;
+	margin:0 15px 0 15px;
+}
+nav  {
+	width:31%;
+	margin:15px 0 0 0;
+	float:right;
+}
+
+nav ul  {
+    text-align:center;
+    padding:5px 25px;
+}
+nav ul li  {
+	display:inline;
+	list-style: none;
+	padding:2%;
+	font-size:20px;
+	line-height:16px;
+}
+
+footer  {
+    width:80%;
+    margin:20px auto;
+    font-size:20px;
+    height:50px;
+    border:15px thick black;
+    clear:both;
+    line-height:15px;
+    padding:25px;
+}
+footer ul  {
+    text-align:center;
+}
+footer ul li  {
+    display:inline;
+    padding: 5px 20px 5px 20px;
+    color:black;
+}
+
+footer hr  {
+	width:80%;
+	margin:20px auto 20px auto;
+}
