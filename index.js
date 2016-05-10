@@ -135,30 +135,20 @@
        //IF A BOOK IS FOUND IT IS UPDATED
        if (books.updateInfo() === 1){
            //Send a msg saying it was updated
-<<<<<<< HEAD
+
            res.render(updateMsg + ' to ' + req.body.updateAddAuthor);
        }
        //IF IT WAS NOT UPDATED
        else{
            res.render('Nothing was updated');
-=======
-           res.send(updateMsg + ' to ' + req.body.updateAddAuthor);
-       }
-       //IF IT WAS NOT UPDATED
-       else{
-           res.send('Nothing was updated');
->>>>>>> c2e36a4add5a893071814b02af4a3ef71de13545
        }
         
     });
 
     
     //Middleware
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> c2e36a4add5a893071814b02af4a3ef71de13545
+
     // 404 Catch-All Handler
     server.use(function(req, res, next){
     res.status(404);
