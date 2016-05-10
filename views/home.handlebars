@@ -1,0 +1,35 @@
+<h1>Mike Murphy's Library</h1>
+
+<h3>Enter a Book Title</h3>
+
+<!--SEARCH FOR A BOOK-->
+<form method="POST" action="/search">
+	<input type="text" name="userinput" placeholder="Search" required maxlength="100">
+	<button>Find</button>
+</form>
+
+<!--ADD A BOOK-->
+<h3>Add a Book:</h3>
+<form method="POST" action="/add">
+	<input type="text" name="addAuthor" placeholder="Author Name" required maxlength="100"><br>
+	<input type="text" name="addTitle" placeholder="Book Title" required maxlength="100"><br>
+	<input type="text" name="addPages" placeholder="Page Amount" required maxlength="100"><br>
+	<button>Add</button>
+</form>
+
+<!--UPDATE A BOOK-->
+<h3>Update a Book:</h3>
+<form method="POST" action="/update">
+	<input type="text" name="oldBook" placeholder="Book to Update" required maxlength="100"><br>
+	<input type="text" name="updateAddAuthor" placeholder="Author Name" required maxlength="100"><br>
+	<input type="text" name="updateAddTitle" placeholder="Book Title" required maxlength="100"><br>
+	<input type="text" name="updateAddPages" placeholder="Page Amount" required maxlength="100"><br>
+	<button>Update</button>
+</form>
+
+<!--REMOVE A BOOK-->
+<h3>Remove a Book:</h3>
+<form method="POST" action="/remove">
+	<input type="text" name="checkOut" placeholder="Existing Book" required maxlength="100">
+	<button>Remove</button>
+</form>
