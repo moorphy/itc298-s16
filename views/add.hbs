@@ -1,0 +1,25 @@
+<h2>Add a Book to Murphy Library</h2>
+<br>
+<hr />
+<br>
+<form method="POST" action="/add">
+    <strong><label for "name">Book Title:</label></strong>
+        <br>
+    <input type="text" name="title" placeholder="Enter Book Title" value="{{books.title}}" required maxlength="100">
+    <br>
+    <strong><label for "name">Author:</label></strong>
+        <br>
+    <input type="text" name="name" placeholder="Enter Author's Name" value="{{books.contact}}" required maxlength="100">
+    <br>
+    <strong><label for "pages">Pages: </label></strong>
+        <br>
+    <input type="text" name="pages" placeholder="Enter Amount of Pages"  value="{{books.pages}}" required maxlength="100">
+    <br>
+    <em><label for "digital">Select if Digital Copy: </label></em>
+    <input type="radio" name="digital" value="{{books.digital}}">
+    <br>
+          <button id="btnAdd">Add</button>
+    <br>
+    <br>
+        <hr />
+</form>

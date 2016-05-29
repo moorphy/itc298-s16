@@ -1,0 +1,43 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<div id="deets">
+  {{#matchBook}}
+<h2>Deets: {{title}}</h2>
+
+<br>
+<hr />
+<br>
+<br>
+
+<form method="POST" action="/remove">
+    <strong><label>Title:  </label></strong>
+    <input type="text" name="title" placeholder="Book Title" value="{{title}}" required maxlength="100"><br>
+      <strong><label>Author: </label></strong>
+    <input type="text" name="name" placeholder="Author Name" value="{{name}}" maxlength="100"><br>
+     <strong> <label>Pages:  </label></strong>
+    <input type="text" name="pages" placeholder="Pages"  value="{{pages}}"maxlength="100"><br>
+     <strong> <label>Available for Kindle  </label></strong>
+    <input type="radio" name="digital" value="{{digital}}"maxlength="100"><br>
+   
+    <input type="hidden" name="id" value="{{id}}">
+      <button id="remove">REMOVE</button>
+      <button id="update">UPDATE</button>
+</form>
+{{/matchBook}}
+
+</div>
+
+    
+
+
+<script>
+  //JQUERY FOR BUTTONS
+    $(document).ready(function(){
+        var buttons = $('button');
+        buttons.on('click', function() {
+            var $this = $(this);
+            var action = $this.text().toLowerCase();
+            if (action == 'update') { action = 'add'; }
+            $("form").attr("action", "/"+ action);
+        });
+    });
+</script>
