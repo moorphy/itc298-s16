@@ -1,4 +1,4 @@
-module.exports = function(server){
+module.exports = function(app){
  
    //NODE MODULE FOR LIBRARY
    var books = require('./lib/books.js');
@@ -9,7 +9,7 @@ module.exports = function(server){
    ///////  G E T S  /////////////////////////////////////////////////
     
     //Homepage
-    server.get('/', function (req, res){
+    app.get('/', function (req, res){
         pageTitle = "MM ITC298 Library - Home";
         res.render('home', {
             book:books.getLibrary(),
@@ -17,13 +17,13 @@ module.exports = function(server){
     });
     
     //About Page
-    server.get('/about', function (req, res){
+    app.get('/about', function (req, res){
         pageTitle = "Mike Murphy's ITC298 Library - About";
         res.render('about', {pageTitle});
     });
     
     //Add Book Page
-    server.get('/add', function(req, res){
+    app.get('/add', function(req, res){
         pageTitle = "Add A Book To Murphy Library";
         //Variable created to check for Duplicates
        var bookMatch = books.getBook(req.params.title);
@@ -34,7 +34,7 @@ module.exports = function(server){
     });
     
     //GET DETAILS
-    server.get('/detail/:booktitle', function(req, res){
+    app.get('/detail/:booktitle', function(req, res){
         res.type('text/html');
         var xBook = req.params.booktitle;
         var bookUP = req.params.booktitle.toUpperCase();
@@ -47,7 +47,7 @@ module.exports = function(server){
     ///////////// P O S T S//////////////////////////////////////////////////
 
     //DETAIL PAGE
-    server.post('/detail/:booktitle', function(req,res){
+    app.post('/detail/:booktitle', function(req,res){
     res.type('text/html');
     //FOUND BOOK MUST COMPARE TITLES
     var foundBook = books.getBook(req.body.bookTitle);
@@ -59,7 +59,7 @@ module.exports = function(server){
 });
 
     //ADD A BOOK
-    server.post('/add', function(req,res){
+    app.post('/add', function(req,res){
         res.type('text/html');
         var newBook = {"title":req.body.title.toLowerCase(), "name":req.body.name, "pages":req.body.pages, "digital":req.body.digital};
         var result = books.addBook(newBook);
@@ -68,14 +68,14 @@ module.exports = function(server){
 });
 
     //REMOVE BOOK
-    server.post('/remove', function(req,res){
+    app.post('/remove', function(req,res){
        res.type('text/html'); 
        var result = books.removeBook(req.body.title);
        res.render('detail', {result: result});
     });
  
  ///////////////////////  A  P  I  ///////////////////////////////////////////////////////////
-server.get('/api/books', function(req, res){
+app.get('/api/books', function(req, res){
     var bks= books.getLibrary();
     if(bks){
         res.json(bks);
@@ -85,7 +85,7 @@ server.get('/api/books', function(req, res){
     
 });
 
-server.get('/api/book/:booktitle', function(req,res){
+app.get('/api/book/:booktitle', function(req,res){
     var xTitle = req.params.booktitle.toLowerCase();
     var xBook = books.getBook(xTitle);
     if(xBook){
@@ -102,14 +102,14 @@ server.get('/api/book/:booktitle', function(req,res){
 
 
     // 404 Catch-All Handler
-    server.use(function(req, res, next){
+    app.use(function(req, res, next){
     res.status(404);
     res.render('404');
 });
 
 
     //500 Error Handler
-    server.use(function(err, req, res, next){
+    app.use(function(err, req, res, next){
     console.error(err.stack);
     res.status(500);
     res.render('500');
