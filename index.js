@@ -1,16 +1,16 @@
 //index.js
 
     var express = require('express');
-    var server = express();
+    var app = express();
 
     // CONFIGURE EXPRESS APP
-    server.set('port', process.env.PORT || 3000);//SET PORT
-    server.use(express.static(__dirname + '/public'));//CSS & IMG  
-    server.use(require('body-parser').urlencoded({extended:true})); //support encoded bodies
+    app.set('port', process.env.PORT || 3000);//SET PORT
+    app.use(express.static(__dirname + '/public'));//CSS & IMG  
+    app.use(require('body-parser').urlencoded({extended:true})); //support encoded bodies
     //ROUTES
-    require('./routes.js')(server);
+    require('./routes.js')(app);
     //CROSS ORIGIN RESOURCE SHARING
-    server.use('/api', require('cors')());    
+    app.use('/api', require('cors')());    
      
 
     //TEMPLATE ENGINE
@@ -20,12 +20,12 @@
         extname: '.hbs',
         layoutsDir: viewsPath + '/layouts',  
         partialsDir: viewsPath + '/partials' });
-    server.engine('hbs', handlebars.engine);
-    server.set('views', viewsPath);
-    server.set('view engine', 'hbs');
+    app.engine('hbs', handlebars.engine);
+    app.set('views', viewsPath);
+    app.set('view engine', 'hbs');
 
-    //START SERVER
-    server.listen(server.get('port'), function(){
+    //START app
+    app.listen(app.get('port'), function(){
     console.log('The Server is Up. CTL+C to Terminate')
 });
 
