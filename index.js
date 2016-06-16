@@ -5,23 +5,22 @@
 
     // CONFIGURE EXPRESS APP
     app.set('port', process.env.PORT || 3000);//SET PORT
-    app.use(express.static(__dirname + '/public'));//CSS & IMG  
+    app.use(express.static('public'));//CSS & IMG  
+    app.use(require("body-parser").json()); 
     app.use(require('body-parser').urlencoded({extended:true})); //support encoded bodies
+   
     //ROUTES
-    require('./routes.js')(app);
+    var routes = require('./routes')(app);
+   
     //CROSS ORIGIN RESOURCE SHARING
     app.use('/api', require('cors')());    
      
 
     //TEMPLATE ENGINE
-    var viewsPath = __dirname + '/views'; 
     var handlebars = require('express-handlebars').create({
         defaultLayout:'main', 
-        extname: '.hbs',
-        layoutsDir: viewsPath + '/layouts',  
-        partialsDir: viewsPath + '/partials' });
+        extname: '.hbs' });
     app.engine('hbs', handlebars.engine);
-    app.set('views', viewsPath);
     app.set('view engine', 'hbs');
 
     //START app

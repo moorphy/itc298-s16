@@ -2,10 +2,10 @@
 <a href="/add">Add a Book to the Library</a> 
 <div>
   {{#each book}}
-  		<strong><h3><a id="title" name="title" href="/detail/{{title}}">{{title}}</a></h3></strong>
-		<h4>By: {{name}}</h4>
-		<h5>{{pages}} pages</h5>
-		{{#if digital}}
+  		<strong><h3><a id="title" name="title" href="/detail/{{title}}">{{books.title}}</a></h3></strong>
+		<h4>By: {{books.name}}</h4>
+		<h5>{{books.pages}} pages</h5>
+		{{#if books.digital}}
 		<em><p>Available for Kindle</p></em>
 		{{/if}}
 		<hr />

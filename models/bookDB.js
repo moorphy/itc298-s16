@@ -1,32 +1,25 @@
 //bookDB,js
 
 var mongoose = require('mongoose');
-var credentials = require('../credentials.js');
-var options = {
-    server: {
-        socketOptions:{ 
-            keepAlive:1,
-            connectTimeoutMS: 30000
-        }
-    }
-};
+var credentials = require('../lib/credentials.js');
 
 
 //DATABASE CONNECT //////////////////////////////////
-mongoose.connect(credentials.mongo.connectionString, options);
+mongoose.connect(credentials.mongo.development.connectionString);
 /////////////////////////////////////////////////////
 
-//DATABASE SCHEMA
-var Schema = mongoose.Schema;
+var dbConnect = mongoose.connection; 
+dbConnect.on('error', 
+console.error.bind(console, 'Connection Error:')); 
 
-var bookSchema = new Schema({
+//DATABASE SCHEMA
+var bookSchema = mongoose.Schema({
    name: String,
    title: String,
    pages: Number,
-   digital: Boolean
+   digital: Boolean,
 });
-
-var bookModel = mongoose.model('bookDB', bookSchema);
+var Book =  mongoose.model('Book', bookSchema);
 
 //EXPORT MODEL TO APPLICATION
-module.exports = bookModel;
+module.exports = Book;
