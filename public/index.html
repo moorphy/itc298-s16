@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+    <head>
+        <html lang="en-US">
+        <meta charset = "utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/styles.css">
+        <!--IMPORT ANGULAR-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        
+        <title>HW 8 -Angular</title>
+
+        
+    </head>
+    <script>
+    //Create Library App and Controller
+    var libraryApp = angular.module('libraryApp', []);
+    libraryApp.controller('LibraryController', function($scope){
+            
+            //Create Library Array called books, or bks
+        $scope.bks = [
+            {id: 0, name: 'J.K Rowling', title: 'Harry Potter and the Goblet of Fire', pages: 734, digital: true},
+            {id: 1, name: 'Ken Kesey', title: 'One Flew Over the Cuckoos Nest', pages: 320, digital: true},
+            {id: 2, name: 'Jack Kerouac', title: 'The Dharma Bums', pages: 244, digital: false},
+            {id: 3, name: 'Ray Bradbury', title: 'The Martian Chronicles', pages:222,  digital:true},
+            {id: 4, name: 'George R.R. Martin', title: 'A Game of Thrones', pages:694, digital:false},
+            {id: 5, name: 'Herman Hesse', title: 'Steppenwolf', pages:237, digital:true},
+            {id: 6, name: 'Stephen King', title: 'The Shining', pages:447, digital:true},
+            {id: 666, name: 'Donald Trump' , title: 'The Art Of The Deal', pages:666, digital:false},
+            {id: 7, name: 'Isaac Asimov' , title: 'Foundation', pages:255, digital:true},
+            {id: 13, name: 'Kurt Vonnegut' , title: 'Cats\'s Cradle', pages:304, digital:true},
+            {id: 747, name: 'Mark Twain' , title: 'Tom Sawyer', pages:229, digital:false}
+        ];
+            
+            //Scope Search/Detail functions
+            
+            $scope.findBooks = function(){
+                //function to juxtapose input vs title --lowercase
+                function foundBook(obj){
+                    var title = obj.title.toLowerCase();
+                    return title.includes($scope.userInput);
+                }
+                //send back matching results
+                $scope.results = $scope.bks.filter(foundBook);
+                return $scope.results;
+            };
+            //Match the object ID to return xBook
+            $scope.getBook = function(x){
+                function matchBook(obj){
+                    var id = obj.id;
+                    return id === $scope.bks[x].id;
+                }
+                    //return book that matches object ID
+                     $scope.xBook = $scope.bks.find(matchBook);
+                    return $scope.xBook;
+            };
+                
+        });
+        </script>
+
+        <!--View template. Add necessary Angular directives -->
+            <body ng-app="libraryApp">
+            <div ng-controller="LibraryController">
+        <h2>Welcome to Murphy Library</h2>
+        <br>
+        <hr />
+        <br>
+        <form id="angularSearchForm">
+            <div>
+            <label for="search"><strong>Search</strong></label>
+                <br>
+            <input type="text" id="userInput"  ng-model="userInput" name="userInput" placeholder="Enter Book Title" required maxlength="100">
+            <br>
+            </div>
+            <button id="btnFind" ng-bind="getBook($index)">Search</button>
+                    </form>
+            <br>
+
+                <hr />
+
+        <div>
+            <h4>{{results.length}} out of {{bks.length}} books in Murphy Library</h4>
+            <ul ng-repeat="bks in findBooks() | orderBy:'title'">
+          <li><a ng-click="getBook($index)">{{bks.title}}</a></li>
+            </ul>
+        </div>
+        
+        
+        <div id="bookDetails">
+            <h2>DEETS:</h2>
+        <strong><h3>{{xBook.title}}</h3></strong>
+		<h4>By: {{xBook.name}}</h4>
+		<h5>{{xBook.pages}} pages</h5>
+		<em><p ng-if="xBook.digital">Available for Kindle</p></em>
+        </div>
+    </div>
+    </body>
+</html>

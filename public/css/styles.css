@@ -63,3 +63,6 @@ footer hr  {
 h2, h3 {
     text-transform: uppercase;
 }
+li {
+    list-style: none;
+}
