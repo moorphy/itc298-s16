@@ -57,7 +57,7 @@
                 <br>
                 <hr />
             <ul ng-repeat="bk in bks | filter:bkSearch">
-          <li><a ng-click="getBook($index)">{{bk.title}}</a></li>
+          <li><a ng-click="getBook(bk)">{{bk.title}}</a></li>
             </ul>
                 <br>
                 <hr />
