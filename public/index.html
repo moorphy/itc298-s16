@@ -16,7 +16,7 @@
     <script>
     //Create Library App and Controller
     var libraryApp = angular.module('libraryApp', []);
-    libraryApp.controller('LibraryController', function($scope){
+    libraryApp.controller('LibraryController', ['$scope', function($scope){
             
             //Create Library Array called books, or bks
         $scope.bks = [
@@ -27,69 +27,45 @@
             {id: 4, name: 'George R.R. Martin', title: 'A Game of Thrones', pages:694, digital:false},
             {id: 5, name: 'Herman Hesse', title: 'Steppenwolf', pages:237, digital:true},
             {id: 6, name: 'Stephen King', title: 'The Shining', pages:447, digital:true},
-            {id: 666, name: 'Donald Trump' , title: 'The Art Of The Deal', pages:666, digital:false},
+            {id: 666, name: 'Donald Drumpf' , title: 'The Art Of The Deal', pages:666, digital:false},
             {id: 7, name: 'Isaac Asimov' , title: 'Foundation', pages:255, digital:true},
             {id: 13, name: 'Kurt Vonnegut' , title: 'Cats\'s Cradle', pages:304, digital:true},
             {id: 747, name: 'Mark Twain' , title: 'Tom Sawyer', pages:229, digital:false}
         ];
             
-            //Scope Search/Detail functions
-            
-            $scope.findBooks = function(){
-                //function to juxtapose input vs title --lowercase
-                function foundBook(obj){
-                    var title = obj.title.toLowerCase();
-                    return title.includes($scope.userInput);
-                }
-                //send back matching results
-                $scope.results = $scope.bks.filter(foundBook);
-                return $scope.results;
-            };
+        
             //Match the object ID to return xBook
             $scope.getBook = function(x){
-                function matchBook(obj){
-                    var id = obj.id;
-                    return id === $scope.bks[x].id;
-                }
-                    //return book that matches object ID
-                     $scope.xBook = $scope.bks.find(matchBook);
-                    return $scope.xBook;
+                return $scope.xBook = x;
             };
                 
-        });
+        }]);
         </script>
 
         <!--View template. Add necessary Angular directives -->
             <body ng-app="libraryApp">
             <div ng-controller="LibraryController">
         <h2>Welcome to Murphy Library</h2>
+                    <h4>{{bks.length}} books in Murphy Library</h4>
+
         <br>
         <hr />
         <br>
-        <form id="angularSearchForm">
-            <div>
-            <label for="search"><strong>Search</strong></label>
+        <label>Search</label>
+        <input type="text" ng-model="bkSearch"></p>
+        <button ng-click="search()">Search</button>
                 <br>
-            <input type="text" id="userInput"  ng-model="userInput" name="userInput" placeholder="Enter Book Title" required maxlength="100">
-            <br>
-            </div>
-            <button id="btnFind" ng-bind="getBook($index)">Search</button>
-                    </form>
-            <br>
-
                 <hr />
-
-        <div>
-            <h4>{{results.length}} out of {{bks.length}} books in Murphy Library</h4>
-            <ul ng-repeat="bks in findBooks() | orderBy:'title'">
-          <li><a ng-click="getBook($index)">{{bks.title}}</a></li>
+            <ul ng-repeat="bk in bks | filter:bkSearch">
+          <li><a ng-click="getBook($index)">{{bk.title}}</a></li>
             </ul>
-        </div>
+                <br>
+                <hr />
         
         
         <div id="bookDetails">
             <h2>DEETS:</h2>
-        <strong><h3>{{xBook.title}}</h3></strong>
+        <strong><li>{{xBook.title}}</li></strong>
 		<h4>By: {{xBook.name}}</h4>
 		<h5>{{xBook.pages}} pages</h5>
 		<em><p ng-if="xBook.digital">Available for Kindle</p></em>
